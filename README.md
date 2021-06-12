@@ -112,7 +112,7 @@ import keras
 print(tf.__version__)
 print(keras.__version__)
 ```
-### 6. Training
+### 6. Train your own dataset
 Go to the location where you put your `train.py`
 ```py
 %cd /content/drive/MyDrive/.../Project/main/Mask_RCNN
@@ -172,13 +172,58 @@ elif config.NAME == "coco":
 ```
 Then you can run detection<br>
 
-#### Visualization
+### 8. Visualization results
+#### random detection results
+```py
+image_id = random.choice(dataset.image_ids)
+image, image_meta, gt_class_id, gt_bbox, gt_mask =\
+    modellib.load_image_gt(dataset, config, image_id, use_mini_mask=False)
+info = dataset.image_info[image_id]
+print("image ID: {}.{} ({}) {}".format(info["source"], info["id"], image_id, 
+                                       dataset.image_reference(image_id)))
+# Run object detection
+results = model.detect([image], verbose=1)
+
+# Display results
+ax = get_ax(1)
+r = results[0]
+visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'], 
+                            dataset.class_names, r['scores'], ax=ax,
+                            title="Predictions")
+log("gt_class_id", gt_class_id)
+log("gt_bbox", gt_bbox)
+log("gt_mask", gt_mask)
+```
 <img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/Result%203.png" width =300> <img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/Result%206.png" width =300> <img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/Result%205.png" width =300>
 
 #### Precision Recall
+```py
+# Draw precision-recall curve
+AP, precisions, recalls, overlaps = utils.compute_ap(gt_bbox, gt_class_id, gt_mask,
+                                          r['rois'], r['class_ids'], r['scores'], r['masks'])
+visualize.plot_precision_recall(AP, precisions, recalls)
+```
+
 <img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/Precision%20Recall.png" width =500> 
 
 #### Weight Histograms
+```py
+# Pick layer types to display
+LAYER_TYPES = ['Conv2D', 'Dense', 'Conv2DTranspose']
+# Get layers
+layers = model.get_trainable_layers()
+layers = list(filter(lambda l: l.__class__.__name__ in LAYER_TYPES, 
+                layers))
+# Display Histograms
+fig, ax = plt.subplots(len(layers), 2, figsize=(10, 3*len(layers)),
+                       gridspec_kw={"hspace":1})
+for l, layer in enumerate(layers):
+    weights = layer.get_weights()
+    for w, weight in enumerate(weights):
+        tensor = layer.weights[w]
+        ax[l, w].set_title(tensor.name)
+        _ = ax[l, w].hist(weight[w].flatten(), 50)
+```
 <img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/download.png" width =800>
 
 ## Reference
