@@ -121,7 +121,7 @@ Start training (It might take a while
 ```py
 !python3 train.py train --dataset= your dataset path --weights=coco
 ```
-<img src="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Screen%20Shot%202021-06-11%20at%2010.43.25%20PM.png" width = 1000>
+<img src="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/Screen%20Shot%202021-06-11%20at%2010.43.25%20PM.png" width = 1000>
 
 ### 7. Test 
 Since I do not try every line of the testing code, I collect what I tried in `inspect_model.ipynb`, which is also from SriRamGovardhanam. You can find it in sample`Mask_RCNN/samples/coco`<br>
@@ -173,13 +173,13 @@ elif config.NAME == "coco":
 Then you can run detection<br>
 
 #### Visualization
-<img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Result%203.png" width =300> <img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Result%206.png" width =300> <img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Result%205.png" width =300>
+<img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/Result%203.png" width =300> <img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/Result%206.png" width =300> <img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/Result%205.png" width =300>
 
 #### Precision Recall
-<img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Precision%20Recall.png" width =500> 
+<img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/Precision%20Recall.png" width =500> 
 
 #### Weight Histograms
-<img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/download.png" width =800>
+<img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/download.png" width =800>
 
 ## Reference
 https://github.com/SriRamGovardhanam/Mask_RCNN <br>
