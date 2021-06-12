@@ -26,8 +26,8 @@ Project
 ```
 Source: [Analytics Vidhya](https://medium.com/analytics-vidhya/training-your-own-data-set-using-mask-r-cnn-for-detecting-multiple-classes-3960ada85079)
 
-### 3. Collecting Mask RCNN file on gitHub
-You can just clone mine of course, where else the codes are: 
+### 3. Clone Mask RCNN file on gitHub
+You can just clone mine of course(except `mask_rcnn_coco.h5`), where else the codes are: 
 https://github.com/matterport/Mask_RCNN &
 https://github.com/SriRamGovardhanam/wastedata-Mask_RCNN-multiple-classes
 Please refer
