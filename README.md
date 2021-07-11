@@ -201,6 +201,7 @@ log("gt_mask", gt_mask)
 Since my research goal is to get the location of seams, to get the coordinate of the mask is a must.
 I added a new method called `display_contours` in `visualize.py`, which is to collect the coordinates of each point on the poly gon.
 Then, in the `inspect_model.ipynb`, calculate the distance of every two points and keep the ones with longest distance as the start and end point.
+
 <img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/image%20with%20start%20and%20end%20point.png" width =300> 
 
 ## Reference
