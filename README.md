@@ -194,37 +194,14 @@ log("gt_class_id", gt_class_id)
 log("gt_bbox", gt_bbox)
 log("gt_mask", gt_mask)
 ```
-<img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/Result%203.png" width =300> <img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/Result%206.png" width =300> <img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/Result%205.png" width =300>
+<img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/Result%2010.png" width =300> 
 
-#### Precision Recall
-```py
-# Draw precision-recall curve
-AP, precisions, recalls, overlaps = utils.compute_ap(gt_bbox, gt_class_id, gt_mask,
-                                          r['rois'], r['class_ids'], r['scores'], r['masks'])
-visualize.plot_precision_recall(AP, precisions, recalls)
-```
 
-<img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/Precision%20Recall.png" width =500> 
-
-#### Weight Histograms
-```py
-# Pick layer types to display
-LAYER_TYPES = ['Conv2D', 'Dense', 'Conv2DTranspose']
-# Get layers
-layers = model.get_trainable_layers()
-layers = list(filter(lambda l: l.__class__.__name__ in LAYER_TYPES, 
-                layers))
-# Display Histograms
-fig, ax = plt.subplots(len(layers), 2, figsize=(10, 3*len(layers)),
-                       gridspec_kw={"hspace":1})
-for l, layer in enumerate(layers):
-    weights = layer.get_weights()
-    for w, weight in enumerate(weights):
-        tensor = layer.weights[w]
-        ax[l, w].set_title(tensor.name)
-        _ = ax[l, w].hist(weight[w].flatten(), 50)
-```
-<img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/download.png" width =800>
+#### Contour 
+Since my research goal is to get the location of seams, to get the coordinate of the mask is a must.
+I added a new method called `display_contours` in `visualize.py`, which is to collect the coordinates of each point on the poly gon.
+Then, in the `inspect_model.ipynb`, calculate the distance of every two points and keep the ones with longest distance as the start and end point.
+<img src ="https://github.com/Tzu-Jan/MaskRCNN_Application-on-welding-seam/blob/main/Illustration/image%20with%20start%20and%20end%20point.png" width =300> 
 
 ## Reference
 https://github.com/SriRamGovardhanam/Mask_RCNN <br>
